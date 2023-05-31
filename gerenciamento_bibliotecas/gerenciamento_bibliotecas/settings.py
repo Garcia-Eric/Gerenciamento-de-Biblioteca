@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'usuario.apps.UsuarioConfig',
+    'home.apps.HomeConfig',
 ]
 
 MIDDLEWARE = [
@@ -58,6 +59,7 @@ TEMPLATES = [
         'DIRS': [
             BASE_DIR / 'templates',
             BASE_DIR / 'usuario/templates',
+            BASE_DIR / 'home/templates',
         ],
         'APP_DIRS': True,
         'OPTIONS': {
