@@ -1,0 +1,12 @@
+* {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 16px;
+}
+
+:root {
+    --letra-grande: 2em;
+}
+
+h1 {
+    font-size: var(--letra-grande);
+}
