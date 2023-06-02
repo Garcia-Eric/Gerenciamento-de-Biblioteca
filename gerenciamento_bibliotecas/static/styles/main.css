@@ -5,8 +5,13 @@
 
 :root {
     --letra-grande: 2em;
+    --letra-media: 1.4em;
 }
 
 h1 {
     font-size: var(--letra-grande);
+}
+
+.margin-direita-extra-grande {
+    margin-right: 100px;
 }
