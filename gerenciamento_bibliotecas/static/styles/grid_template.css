@@ -8,11 +8,12 @@ body {
 
 nav {
     grid-area: nav;
-    margin: 20px 0;
+    margin: 20px 0 60px 0;
 }
 
 nav ul {
     list-style-type: none;
+    display: inline-block;
     margin: 0;
     padding: 0;
     overflow: hidden;
@@ -20,11 +21,10 @@ nav ul {
 
 nav ul li {
     float: left;
+    padding: 0 16px;
 }
 
 nav a {
-    padding: 0 16px;
-    text-align: center;
     text-decoration: none;
     font-size: var(--letra-media);
     font-weight: bold;

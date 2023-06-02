@@ -1,0 +1,17 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<h3 class="texto-centro">Usuários com prazos vencidos</h3>
+
+<usuarios-vencidos>
+    {% for usuario in usuarios %}
+        <div>
+            <b>Usuário: </b>{{ usuario.nome }} <br>
+            <b>Livro: </b>{{ usuario.livro }} <br>
+            <b>Venceu a: </b>{{ usuario.dias_vencidos }} dia(s)
+        </div>
+    {% endfor %}
+</usuarios-vencidos>
+
+{% endblock %}

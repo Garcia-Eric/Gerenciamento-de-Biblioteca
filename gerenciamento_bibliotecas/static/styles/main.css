@@ -6,12 +6,24 @@
 :root {
     --letra-grande: 2em;
     --letra-media: 1.4em;
+    --letra-media-pequena: 1.2em;
 }
 
 h1 {
     font-size: var(--letra-grande);
 }
 
-.margin-direita-extra-grande {
-    margin-right: 100px;
+h2 {
+    font-size: var(--letra-media);
+}
+
+h3 {
+    font-size: var(--letra-media-pequena);
+    color: #4f4f4f;
+    font-weight: 400;
+}
+
+usuarios-vencidos {
+    display: flex;
+    justify-content: center;
 }
