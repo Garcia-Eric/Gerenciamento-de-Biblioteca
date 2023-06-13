@@ -1,7 +1,7 @@
 body {
     display: grid;
     grid-template:
-        "nav nav nav" 1fr
+        "nav nav nav" auto
         "main main main" 1fr
         "main main main" 1fr;
 }
