@@ -4,9 +4,13 @@
 }
 
 :root {
+    /* tamanhos de letras */
     --letra-grande: 2em;
     --letra-media: 1.4em;
     --letra-media-pequena: 1.2em;
+
+    /* cores */
+    --vermelho: #e80000;
 }
 
 h1 {
@@ -23,7 +27,30 @@ h3 {
     font-weight: 400;
 }
 
-usuarios-vencidos {
+[flex] {
     display: flex;
+}
+
+[flex="centro"] {
     justify-content: center;
+}
+
+usuarios-vencidos > div {
+    margin: 0 10px;
+}
+
+usuarios-vencidos {
+    padding: 40px;
+}
+
+livros-adicionados-recentemente {
+    padding: 40px;
+}
+
+livros-adicionados-recentemente > div {
+    /* proporção 3:4 */
+    width: 200px;
+    height: 266.66px;
+    margin: 0 10px;
+    background-color: #4f4f4f;
 }

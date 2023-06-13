@@ -5,9 +5,19 @@ def home(request):
         'usuarios': [
             {
                 'nome': 'Gianluca',
+                'livro': 'Chapelzinho Vermelho',
+                'dias_vencidos': 13,
+            },
+            {
+                'nome': 'Diogo',
                 'livro': 'O Poder do Agora',
                 'dias_vencidos': 19,
-            }
+            },
+            {
+                'nome': 'Eric',
+                'livro': 'Revolução dos Bixos',
+                'dias_vencidos': 22,
+            },
         ]
     }
 

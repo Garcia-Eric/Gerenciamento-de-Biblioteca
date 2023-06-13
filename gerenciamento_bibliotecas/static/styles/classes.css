@@ -1,3 +1,7 @@
 .texto-centro {
     text-align: center;
 }
+
+.texto-vermelho {
+    color: var(--vermelho);
+}
