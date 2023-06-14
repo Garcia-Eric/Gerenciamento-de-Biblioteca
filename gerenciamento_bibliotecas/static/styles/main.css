@@ -49,7 +49,9 @@ livros-adicionados-recentemente {
 
 livros-adicionados-recentemente > img {
     /* proporção 3:4 */
+    display: block;
     width: 200px;
     height: 266.66px;
     margin: 0 10px;
+    box-shadow: 11px 9px 0px 0px rgba(0,0,0,0.1);
 }

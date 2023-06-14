@@ -1,11 +1,12 @@
 from django.shortcuts import render
+from django.conf import settings
 
 def home(request):
     context = {
         'usuarios': [
             {
                 'nome': 'Gianluca',
-                'livro': 'Chapelzinho Vermelho',
+                'livro': 'Chapeuzinho Vermelho',
                 'dias_vencidos': 13,
             },
             {
@@ -22,7 +23,7 @@ def home(request):
         'livros': [
             {
                 'nome': 'Guia do Mochileiro das Galáxias',
-                'imagem' : 'images/livros/guia_do_mochileiro_das_galaxias.jpg',
+                'imagem' : f'{settings.STATIC_URL}images/livros/guia_do_mochileiro_das_galaxias.jpg',
             }
         ],
     }
