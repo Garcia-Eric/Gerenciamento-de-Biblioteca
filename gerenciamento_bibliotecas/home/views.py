@@ -18,7 +18,13 @@ def home(request):
                 'livro': 'Revolução dos Bixos',
                 'dias_vencidos': 22,
             },
-        ]
+        ],
+        'livros': [
+            {
+                'nome': 'Guia do Mochileiro das Galáxias',
+                'imagem' : 'images/livros/guia_do_mochileiro_das_galaxias.jpg',
+            }
+        ],
     }
 
     return render(request, 'home/home.html', context)

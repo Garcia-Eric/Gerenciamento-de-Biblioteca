@@ -47,10 +47,9 @@ livros-adicionados-recentemente {
     padding: 40px;
 }
 
-livros-adicionados-recentemente > div {
+livros-adicionados-recentemente > img {
     /* proporção 3:4 */
     width: 200px;
     height: 266.66px;
     margin: 0 10px;
-    background-color: #4f4f4f;
 }

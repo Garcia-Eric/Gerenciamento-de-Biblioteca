@@ -17,9 +17,9 @@
 <h3 class="texto-centro">Livros Adicionados Recentemente</h3>
 
 <livros-adicionados-recentemente flex="centro">
-    <div></div>
-    <div></div>
-    <div></div>
+    {% for livro in livros %}
+        <img src="images\livros\guia_do_mochileiro_das_galaxias.jpg" alt="{{ livro.nome }}" title="{{ livro.nome }}">
+    {% endfor %}
 </livros-adicionados-recentemente>
 
 {% endblock %}
