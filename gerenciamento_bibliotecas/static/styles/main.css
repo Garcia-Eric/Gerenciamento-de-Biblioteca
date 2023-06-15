@@ -1,8 +1,3 @@
-* {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 16px;
-}
-
 :root {
     /* tamanhos de letras */
     --letra-grande: 2em;
@@ -11,6 +6,59 @@
 
     /* cores */
     --vermelho: #e80000;
+}
+
+* {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 16px;
+}
+
+body {
+    display: grid;
+    grid-template:
+        "nav nav nav" auto
+        "main main main" 1fr
+        "main main main" 1fr;
+
+    background: linear-gradient(to top right, #5afffa, #e2ffff, #ffcece) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+nav {
+    grid-area: nav;
+    margin: 20px 0 60px 0;
+}
+
+nav ul {
+    list-style-type: none;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+nav ul li {
+    float: left;
+    padding: 0 16px;
+}
+
+nav a {
+    text-decoration: none;
+    font-size: var(--letra-media);
+    font-weight: bold;
+    color: black;
+}
+
+grid-nav {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+
+main {
+    grid-area: main;
 }
 
 h1 {
@@ -53,5 +101,5 @@ livros-adicionados-recentemente > img {
     width: 200px;
     height: 266.66px;
     margin: 0 10px;
-    box-shadow: 11px 9px 0px 0px rgba(0,0,0,0.1);
+    box-shadow: 11px 9px 3px 0px rgba(0,0,0,0.1);
 }
