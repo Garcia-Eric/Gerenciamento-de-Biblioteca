@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.conf import settings
-from .forms import CategoriaForm, GeneroForm, LocalizacaoForm
+from . import forms
 
 
 def home(request):
@@ -35,7 +35,10 @@ def home(request):
 
 def create_book(request):
     context = {}
-    context['form_categoria'] = CategoriaForm()
-    context['form_genero'] = GeneroForm()
-    context['form_localizacao'] = LocalizacaoForm()
+    context['form_livro'] = forms.FormLivro()
     return render(request, 'home/cadastro_livro.html', context)
+
+
+    # if request.method == "POST":  
+    #     form = BookForm(request.POST) 
+        

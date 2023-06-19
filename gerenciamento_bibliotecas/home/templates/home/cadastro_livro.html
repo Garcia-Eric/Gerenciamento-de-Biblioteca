@@ -4,17 +4,7 @@
     <div container>
         <form method='POST'>
             {% csrf_token %}
-            <input type='text' name='nome_autor' placeholder='Nome do autor'>
-            <input type='text' name='titulo_livro' placeholder='Nome do livro'>
-            <input type='text' name='editora' placeholder='Nome do Editora'>
-            <br>
-            {{ form_genero }}
-            <br>
-            {{ form_categoria }}
-            <br>
-            {{ form_localizacao }}
-            <br>
-            <input type='text' placeholder='Sinopse'>
+            {{form_livro}}
             <br>
 
             <button type='submit'>Cadastrar</button>

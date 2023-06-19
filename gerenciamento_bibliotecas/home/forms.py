@@ -1,24 +1,13 @@
 from django import forms
 from .models import Genero
 
-
-class CategoriaForm(forms.Form):
+class FormLivro(forms.Form):
     CATEGORIA_CHOICES = [
         ("INFANTIL", "Infantil"),
         ("JUVENIL", "Juvenil"),
         ("ADULTO", "Adulto")
     ]
-    categoria_field = forms.ChoiceField(
-        label='Categoria', choices=CATEGORIA_CHOICES)
-
-
-class GeneroForm(forms.Form):
-    GENERO_CHOICES = Genero.get_generos()
-    genero_field = forms.ChoiceField(
-            label='Gênero', choices=GENERO_CHOICES)
-
-
-class LocalizacaoForm(forms.Form):
+    GENERO_CHOICES = Genero.get_generos()    
     LOCALIZACAO_CHOICES = [
         ('000', 'Generalidades'),
         ('100', 'Filosofia e Psicologia'),
@@ -31,5 +20,10 @@ class LocalizacaoForm(forms.Form):
         ('800', 'Literatura'),
         ('900', 'Geografia/História/Biografia'),
     ]
-    localizacao_field = forms.ChoiceField(
-        label='Local', choices=LOCALIZACAO_CHOICES)
+    
+    titulo_livro = forms.CharField(label="Título do livro", max_length=100)    
+    nome_autor = forms.CharField(label="Nome autor",max_length=75)
+    editora = forms.CharField(max_length=50)
+    genero = forms.ChoiceField(choices=GENERO_CHOICES)
+    localizacao = forms.ChoiceField(choices=LOCALIZACAO_CHOICES)
+    categoria = forms.ChoiceField(choices=CATEGORIA_CHOICES)
