@@ -1,3 +1,4 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.conf import settings
 from . import forms
@@ -33,12 +34,39 @@ def home(request):
     return render(request, 'home/home.html', context)
 
 
-def create_book(request):
-    context = {}
-    context['form_livro'] = forms.FormLivro()
-    return render(request, 'home/cadastro_livro.html', context)
+def create_book_form(request):
+    # context = {}
+    # context['form_livro'] = forms.FormLivro()
+    # return render(request, 'home/cadastro_livro.html', context)
+    if request.method == "POST":  
+        formulario = forms.FormLivro(request.POST)        
+        if formulario.is_valid():
+            info_livro = {
+                'titulo': request.POST.get('titulo_livro'),
+                'autor': request.POST.get('nome_autor'),
+                'editora': request.POST.get('editora'),
+                'gen': request.POST.get('genero'),
+                'loc': request.POST.get('localizacao'),
+                'cat': request.POST.get('categoria'),
+                'sin': request.POST.get('sinopse'),
+                'src': request.POST.get('src_imagem'),
+            }            
+            formulario.save(info_livro['titulo'],
+                            info_livro['autor'],
+                            info_livro['editora'],
+                            info_livro['gen'],
+                            info_livro['loc'],
+                            info_livro['cat'],
+                            info_livro['sin'],
+                            info_livro['src'],
+                            )
+            return HttpResponseRedirect(request.path_info)
+    else:
+        formulario = forms.FormLivro()        
+    return render(request, 'home/cadastro_livro.html', {'form':forms.FormLivro()})
 
 
-    # if request.method == "POST":  
-    #     form = BookForm(request.POST) 
+# def save_book(request):
+#     if request.method == "POST":  
+#         form = formFormLivro(request.POST) 
         

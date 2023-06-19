@@ -23,6 +23,23 @@ class Livro(models.Model):
     genero = models.ManyToManyField(Genero)
     localizacao = models.CharField(max_length=3)
     categoria = models.CharField(max_length=10)
+    sinopse = models.TextField(max_length=512)
+    src_imagem = models.TextField()
+      
+    @classmethod
+    def save_livro(cls, tit, aut, edi, gen, loc, cat, sin, src):
+        genero = Genero.objects.filter(id=gen)
+        
+        livro = Livro.objects.create(titulo_livro=tit,
+                        nome_autor=aut,
+                        editora=edi,                        
+                        localizacao=loc,
+                        categoria=cat,
+                        sinopse=sin,
+                        src_imagem=src
+                    )
+        livro.genero.set(genero)
+        livro.save()
       
     class Meta():
         db_table = 'livro'
