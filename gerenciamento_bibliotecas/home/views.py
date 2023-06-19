@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.conf import settings
+from .forms import CategoriaForm, GeneroForm, LocalizacaoForm
+
 
 def home(request):
     context = {
@@ -23,7 +25,7 @@ def home(request):
         'livros': [
             {
                 'nome': 'Guia do Mochileiro das Galáxias',
-                'imagem' : f'{settings.STATIC_URL}images/livros/guia_do_mochileiro_das_galaxias.jpg',
+                'imagem': f'{settings.STATIC_URL}images/livros/guia_do_mochileiro_das_galaxias.jpg',
             }
         ],
     }
@@ -32,6 +34,8 @@ def home(request):
 
 
 def create_book(request):
-    context = {'just for':'toc purposes'}
+    context = {}
+    context['form_categoria'] = CategoriaForm()
+    context['form_genero'] = GeneroForm()
+    context['form_localizacao'] = LocalizacaoForm()
     return render(request, 'home/cadastro_livro.html', context)
-

@@ -7,11 +7,17 @@
             <input type='text' name='nome_autor' placeholder='Nome do autor'>
             <input type='text' name='titulo_livro' placeholder='Nome do livro'>
             <input type='text' name='editora' placeholder='Nome do Editora'>
-            <input type='text' name='genero' placeholder='Gênero'>
-            <input type='text' name='categoria' placeholder='Categoria'>
-            <input type='text' name='localizacao' placeholder='Localização'>
-
+            <br>
+            {{ form_genero }}
+            <br>
+            {{ form_categoria }}
+            <br>
+            {{ form_localizacao }}
+            <br>
             <input type='text' placeholder='Sinopse'>
+            <br>
+
+            <button type='submit'>Cadastrar</button>
         </form>
     </div>
 
