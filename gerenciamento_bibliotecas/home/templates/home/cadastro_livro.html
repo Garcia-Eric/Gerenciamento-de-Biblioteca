@@ -1,0 +1,15 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    <div container>
+        <form method='POST'>
+            {% csrf_token %}
+            {{form_livro}}
+            <br>
+
+            <button type='submit'>Cadastrar</button>
+        </form>
+    </div>
+
+
+{% endblock %}
