@@ -29,3 +29,9 @@ def home(request):
     }
 
     return render(request, 'home/home.html', context)
+
+
+def create_book(request):
+    context = {'just for':'toc purposes'}
+    return render(request, 'home/cadastro_livro.html', context)
+

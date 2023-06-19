@@ -1,0 +1,19 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    <div container>
+        <form method='POST'>
+            {% csrf_token %}
+            <input type='text' name='nome_autor' placeholder='Nome do autor'>
+            <input type='text' name='titulo_livro' placeholder='Nome do livro'>
+            <input type='text' name='editora' placeholder='Nome do Editora'>
+            <input type='text' name='genero' placeholder='Gênero'>
+            <input type='text' name='categoria' placeholder='Categoria'>
+            <input type='text' name='localizacao' placeholder='Localização'>
+
+            <input type='text' placeholder='Sinopse'>
+        </form>
+    </div>
+
+
+{% endblock %}
