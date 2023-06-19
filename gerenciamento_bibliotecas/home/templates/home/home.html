@@ -1,0 +1,25 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<h3 class="texto-centro">Usuários com prazos vencidos</h3>
+
+<usuarios-vencidos flex="centro">
+    {% for usuario in usuarios %}
+        <div>
+            <b>Usuário: {{ usuario.nome }} </b><br>
+            <b>Livro: {{ usuario.livro }} </b><br>
+            <b>Venceu a: <span class="texto-vermelho">{{ usuario.dias_vencidos }} dia(s)</span></b>
+        </div>
+    {% endfor %}
+</usuarios-vencidos>
+
+<h3 class="texto-centro">Livros Adicionados Recentemente</h3>
+
+<livros-adicionados-recentemente flex="centro">
+    {% for livro in livros %}
+        <img src="{{ livro.imagem }}" alt="{{ livro.nome }}" title="{{ livro.nome }}">
+    {% endfor %}
+</livros-adicionados-recentemente>
+
+{% endblock %}
