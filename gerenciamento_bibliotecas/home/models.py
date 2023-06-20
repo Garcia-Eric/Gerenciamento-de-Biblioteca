@@ -31,14 +31,12 @@ class Livro(models.Model):
     @classmethod
     def get_livros_emprestados(cls):
         return [o.fk_livro for o in Emprestimo.objects.all()]
-    
-    
+        
     @classmethod
     def get_livros_disponiveis(cls):
         id_livros_emprestados = [l.pk for l in Livro.get_livros_emprestados()]
         return [l for l in cls.objects.all().exclude(id__in=id_livros_emprestados)]
-      
-      
+            
     @classmethod
     def save_livro(cls, tit, aut, edi, gen, loc, cat, sin, src):
         genero = Genero.objects.filter(id=gen)
@@ -53,7 +51,10 @@ class Livro(models.Model):
                     )
         livro.genero.set(genero)
         livro.save()
-      
+    
+    def __str__(self) -> str:
+        return f"{self.nome_autor} - {self.titulo_livro}"
+    
     class Meta():
         db_table = 'livro'
         ordering = ['titulo_livro']
