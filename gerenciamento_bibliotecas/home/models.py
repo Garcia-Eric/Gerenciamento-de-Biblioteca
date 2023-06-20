@@ -27,6 +27,17 @@ class Livro(models.Model):
     categoria = models.CharField(max_length=10)
     sinopse = models.TextField(max_length=512)
     src_imagem = models.TextField()
+    
+    @classmethod
+    def get_livros_emprestados(cls):
+        return [o.fk_livro for o in Emprestimo.objects.all()]
+    
+    
+    @classmethod
+    def get_livros_disponiveis(cls):
+        id_livros_emprestados = [l.pk for l in Livro.get_livros_emprestados()]
+        return [l for l in cls.objects.all().exclude(id__in=id_livros_emprestados)]
+      
       
     @classmethod
     def save_livro(cls, tit, aut, edi, gen, loc, cat, sin, src):
