@@ -1,23 +1,21 @@
 {% extends 'main.html' %}
 
 {% block content %}
-    <div container style='display:flex'>
+    <div container flex>
         <div>
             <ul>
-            {% for livro in books %}                
-                <li>{{livro.id}}</li>
-                <img src="{{livro.src_imagem}}"
-                    height=512>
+            {% for livro in emprestados %}                
+                <img src="{{livro.src_imagem}}" height=128>
+                <li><a href='{% url "informacoes_livro" livro.id %}'>{{livro.titulo_livro}}</a><br>{{livro.nome_autor}}</li>                
             {% endfor %}
             </ul>
         </div>
-        
+
         <div>
             <ul>
-            {% for livro in books %}                
+            {% for livro in disponiveis %}                
                 <li>{{livro.id}}</li>
-                <img src="{{livro.src_imagem}}"
-                    height=512>
+                <img src="{{livro.src_imagem}}" height=128>
             {% endfor %}
             </ul>
         </div>

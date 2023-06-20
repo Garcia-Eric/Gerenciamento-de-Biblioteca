@@ -64,6 +64,12 @@ def create_book_form(request):
 
 
 def get_books(request):
-    livro = models.Livro.objects.all()
-    context = {'books':livro}
+    livros_emprestados = models.Livro.get_livros_emprestados()
+    livros_disponiveis = models.Livro.get_livros_disponiveis()
+    context = {'emprestados':livros_emprestados,
+               'disponiveis':livros_disponiveis}
     return render(request, 'home/consultar_livros.html', context)
+    
+
+def get_book_information(request, book_id):
+    ...

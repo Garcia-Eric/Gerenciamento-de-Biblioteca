@@ -29,9 +29,13 @@ class Livro(models.Model):
     src_imagem = models.TextField()
     
     @classmethod
+    def get_livros(cls):
+        return cls.objects.all()
+    
+    @classmethod
     def get_livros_emprestados(cls):
         return [o.fk_livro for o in Emprestimo.objects.all()]
-        
+
     @classmethod
     def get_livros_disponiveis(cls):
         id_livros_emprestados = [l.pk for l in Livro.get_livros_emprestados()]
