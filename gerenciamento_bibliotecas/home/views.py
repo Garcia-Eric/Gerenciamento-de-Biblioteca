@@ -1,6 +1,7 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.conf import settings
-from . import forms
+from . import forms, models
 
 
 def home(request):
@@ -33,12 +34,50 @@ def home(request):
     return render(request, 'home/home.html', context)
 
 
-def create_book(request):
-    context = {}
-    context['form_livro'] = forms.FormLivro()
-    return render(request, 'home/cadastro_livro.html', context)
+def create_book_form(request):
+    if request.method == "POST":  
+        formulario = forms.FormLivro(request.POST)     
+        if formulario.is_valid():
+            info_livro = {
+                'titulo': request.POST.get('titulo_livro'),
+                'autor': request.POST.get('nome_autor'),
+                'editora': request.POST.get('editora'),
+                'gen': request.POST.get('genero'),
+                'loc': request.POST.get('localizacao'),
+                'cat': request.POST.get('categoria'),
+                'sin': request.POST.get('sinopse'),
+                'src': request.POST.get('src_imagem'),
+            }
+            formulario.save(info_livro['titulo'],
+                            info_livro['autor'],
+                            info_livro['editora'],
+                            info_livro['gen'],
+                            info_livro['loc'],
+                            info_livro['cat'],
+                            info_livro['sin'],
+                            info_livro['src'],
+                            )
+            return HttpResponseRedirect(request.path_info)
+    else:
+        formulario = forms.FormLivro()        
+    return render(request, 'home/cadastro_livro.html', {'form':forms.FormLivro()})
 
 
-    # if request.method == "POST":  
-    #     form = BookForm(request.POST) 
-        
+def get_books(request):
+    livros_emprestados = models.Livro.get_livros_emprestados()
+    livros_disponiveis = models.Livro.get_livros_disponiveis()
+    context = {'emprestados':livros_emprestados,
+               'disponiveis':livros_disponiveis}
+    return render(request, 'home/consultar_livros.html', context)
+    
+
+def get_book_information(request, id):
+    livro = models.Livro.objects.get(id=id)
+    context = {'livro':livro,
+               'generos':livro.get_generos_livro(),
+               'localizacao': {
+                   'cod':livro.get_localizacao_livro()[0][0],
+                   'significado':livro.get_localizacao_livro()[0][1]
+                    }
+                }
+    return render(request, 'home/info_livro.html', context)

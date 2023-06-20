@@ -1,5 +1,7 @@
 from django.contrib import admin
-from .models import Genero
+from . import models
 
 # Register your models here.
-admin.site.register(Genero)
+admin.site.register(models.Emprestimo)
+admin.site.register(models.Genero)
+admin.site.register(models.Livro)
