@@ -1,0 +1,13 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    <div container>
+        <form method='POST'>
+            {% csrf_token %}
+            {{form.as_p}}
+
+            <button type='submit'>Cadastrar empréstimo</button>
+        </form>
+    </div>
+
+{% endblock %}

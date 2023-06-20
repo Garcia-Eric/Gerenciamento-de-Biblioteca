@@ -7,7 +7,7 @@ class Genero(models.Model):
     tipo_genero = models.CharField(max_length=50)
 
     @classmethod
-    def get_generos(cls) -> list[int, str]:
+    def get_generos(cls):
         return list(Genero.objects.all().values_list('id', 'tipo_genero'))
 
     def __str__(self) -> str:
@@ -70,7 +70,7 @@ class Livro(models.Model):
     def get_livros_disponiveis(cls):
         id_livros_emprestados = [l.pk for l in Livro.get_livros_emprestados()]
         return [l for l in cls.objects.all().exclude(id__in=id_livros_emprestados)]
-            
+
     @classmethod
     def save_livro(cls, tit, aut, edi, gen, loc, cat, sin, src):
         genero = Genero.objects.filter(id=gen)
@@ -116,5 +116,3 @@ class Emprestimo(models.Model):
     class Meta():
         db_table = 'emprestimo'
         ordering = ['data_emprestimo']
-    
-    
