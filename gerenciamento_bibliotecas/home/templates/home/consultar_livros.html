@@ -16,6 +16,7 @@
             {% for livro in disponiveis %}                
                 <li>{{livro.id}}</li>
                 <img src="{{livro.src_imagem}}" height=128>
+                <li><a href='{% url "informacoes_livro" livro.id %}'>{{livro.titulo_livro}}</a><br>{{livro.nome_autor}}</li>                
             {% endfor %}
             </ul>
         </div>

@@ -19,14 +19,39 @@ class Genero(models.Model):
 
 
 class Livro(models.Model):
+    CATEGORIA_CHOICES = [
+        ("INFANTIL", "Infantil"),
+        ("JUVENIL", "Juvenil"),
+        ("ADULTO", "Adulto")
+    ]
+    LOCALIZACAO_CHOICES = [
+        ('000', 'Generalidades'),
+        ('100', 'Filosofia e Psicologia'),
+        ('200', 'Religião'),
+        ('300', 'Ciências sociais'),
+        ('400', 'Língua e Linguagem'),
+        ('500', 'Ciências Puras'),
+        ('600', 'Tecnologia e ciências aplicadas'),
+        ('700', 'Artes/Esportes e Recreação'),
+        ('800', 'Literatura'),
+        ('900', 'Geografia/História/Biografia'),
+    ]
+    
     titulo_livro = models.CharField(max_length=100)
     nome_autor = models.CharField(max_length=75)
     editora = models.CharField(max_length=50)
     genero = models.ManyToManyField(Genero)
-    localizacao = models.CharField(max_length=3)
-    categoria = models.CharField(max_length=10)
+    localizacao = models.CharField(max_length=3, choices=LOCALIZACAO_CHOICES)
+    categoria = models.CharField(max_length=10, choices=CATEGORIA_CHOICES)
     sinopse = models.TextField(max_length=512)
     src_imagem = models.TextField()
+    
+    @classmethod
+    def get_categorias(cls):
+        return cls.CATEGORIA_CHOICES
+    @classmethod
+    def get_localizacao(cls):
+        return cls.LOCALIZACAO_CHOICES
     
     @classmethod
     def get_livros(cls):
