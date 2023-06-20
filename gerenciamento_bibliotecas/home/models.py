@@ -70,7 +70,7 @@ class Livro(models.Model):
     def get_livros_disponiveis(cls):
         id_livros_emprestados = [l.pk for l in Livro.get_livros_emprestados()]
         return [l for l in cls.objects.all().exclude(id__in=id_livros_emprestados)]
-            
+
     @classmethod
     def save_livro(cls, tit, aut, edi, gen, loc, cat, sin, src):
         genero = Genero.objects.filter(id=gen)
