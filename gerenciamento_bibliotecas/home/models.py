@@ -7,7 +7,7 @@ class Genero(models.Model):
     tipo_genero = models.CharField(max_length=50)
 
     @classmethod
-    def get_generos(cls) -> list[int, str]:
+    def get_generos(cls):
         return list(Genero.objects.all().values_list('id', 'tipo_genero'))
 
     def __str__(self) -> str:
@@ -116,5 +116,3 @@ class Emprestimo(models.Model):
     class Meta():
         db_table = 'emprestimo'
         ordering = ['data_emprestimo']
-    
-    

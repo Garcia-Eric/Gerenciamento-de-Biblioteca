@@ -60,7 +60,7 @@ def create_book_form(request):
             return HttpResponseRedirect(request.path_info)
     else:
         formulario = forms.FormLivro()        
-    return render(request, 'home/cadastro_livro.html', {'form':forms.FormLivro()})
+    return render(request, 'home/livros/cadastro_livro.html', {'form':forms.FormLivro()})
 
 
 def get_books(request):
@@ -68,7 +68,7 @@ def get_books(request):
     livros_disponiveis = models.Livro.get_livros_disponiveis()
     context = {'emprestados':livros_emprestados,
                'disponiveis':livros_disponiveis}
-    return render(request, 'home/consultar_livros.html', context)
+    return render(request, 'home/livros/consultar_livros.html', context)
     
 
 def get_book_information(request, id):
@@ -80,4 +80,4 @@ def get_book_information(request, id):
                    'significado':livro.get_localizacao_livro()[0][1]
                     }
                 }
-    return render(request, 'home/info_livro.html', context)
+    return render(request, 'home/livros/info_livro.html', context)
