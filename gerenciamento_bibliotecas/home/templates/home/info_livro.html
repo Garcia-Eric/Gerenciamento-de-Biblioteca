@@ -1,2 +1,28 @@
 {% extends 'main.html' %}
 
+{% block content %}
+<div container flex>
+    <div>
+        <h2>{{livro.titulo_livro}}<h2>
+        <img src="{{livro.src_imagem}}" height=512>
+
+        <table>
+        <tr>Autor: {{livro.nome_autor}}</tr><br>
+        <br>
+        <tr>Editora: {{livro.editora}}</tr><br>
+        <tr>Gênero: {% for genero in generos %}
+                        {{genero}}.
+                    {% endfor %}</tr><br>
+        <br>
+        <tr>Localização:<br>
+            {{localizacao.cod}} - {{localizacao.significado}}
+            </tr><br>
+        </table>
+    </div>
+
+    <div>
+        <h3>Sinopse:</h3>
+        <p>{{livro.sinopse}}<p>
+    </div>
+</div>
+{% endblock %}

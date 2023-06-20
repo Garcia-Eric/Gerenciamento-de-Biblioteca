@@ -49,17 +49,22 @@ class Livro(models.Model):
     @classmethod
     def get_categorias(cls):
         return cls.CATEGORIA_CHOICES
+    
     @classmethod
     def get_localizacao(cls):
-        return cls.LOCALIZACAO_CHOICES
-    
+        return cls.LOCALIZACAO_CHOICES 
+       
     @classmethod
     def get_livros(cls):
         return cls.objects.all()
-    
     @classmethod
     def get_livros_emprestados(cls):
-        return [o.fk_livro for o in Emprestimo.objects.all()]
+        return [o.fk_livro for o in Emprestimo.objects.all()]    
+    def get_generos_livro(self):
+        return [genero.tipo_genero for genero in self.genero.all()]
+    def get_localizacao_livro(self):
+        localizacao = self.localizacao
+        return [list(local) for local in Livro.LOCALIZACAO_CHOICES if local[0]==localizacao]
 
     @classmethod
     def get_livros_disponiveis(cls):

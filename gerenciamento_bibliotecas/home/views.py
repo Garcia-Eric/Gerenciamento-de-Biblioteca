@@ -73,5 +73,11 @@ def get_books(request):
 
 def get_book_information(request, id):
     livro = models.Livro.objects.get(id=id)
-    context = {'book':livro}
-    return render(request, 'home/consultar_livros.html', context)
+    context = {'livro':livro,
+               'generos':livro.get_generos_livro(),
+               'localizacao': {
+                   'cod':livro.get_localizacao_livro()[0][0],
+                   'significado':livro.get_localizacao_livro()[0][1]
+                    }
+                }
+    return render(request, 'home/info_livro.html', context)
