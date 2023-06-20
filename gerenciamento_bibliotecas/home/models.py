@@ -1,4 +1,6 @@
 from django.db import models
+import datetime
+from django.conf import settings
 
 # Create your models here.
 class Genero(models.Model):
@@ -44,3 +46,29 @@ class Livro(models.Model):
     class Meta():
         db_table = 'livro'
         ordering = ['titulo_livro']
+        
+        
+class Emprestimo(models.Model):    
+    # Data atual
+    hoje = datetime.date.today()
+    DIAS_MES = 31
+    # Adição de 2 meses a data atual
+    daqui_2_meses = hoje + datetime.timedelta(days=DIAS_MES * 2)
+    AUTH_USER_MODEL = getattr(settings, 'AUTH_USER_MODEL', 'auth.User')
+
+    fk_user = models.OneToOneField(AUTH_USER_MODEL, blank=False, null=False, on_delete=models.RESTRICT)
+    fk_livro = models.OneToOneField(Livro, blank=False, null=False, on_delete=models.RESTRICT)
+    data_emprestimo = models.DateField(default=hoje)
+    prazo_devolucao = models.DateField(default=daqui_2_meses)
+    
+    def tempo_ate_devolucao(self):
+        return (self.prazo_devolucao - self.data_emprestimo)
+    
+    def __str__(self) -> str:
+        return f"Empréstimo: {self.pk}. Devolução: {self.prazo_devolucao}. Tempo até devolução: {self.tempo_ate_devolucao()}"
+    
+    class Meta():
+        db_table = 'emprestimo'
+        ordering = ['data_emprestimo']
+    
+    

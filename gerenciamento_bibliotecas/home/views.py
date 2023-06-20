@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.conf import settings
-from . import forms
+from . import forms, models
 
 
 def home(request):
@@ -35,11 +35,8 @@ def home(request):
 
 
 def create_book_form(request):
-    # context = {}
-    # context['form_livro'] = forms.FormLivro()
-    # return render(request, 'home/cadastro_livro.html', context)
     if request.method == "POST":  
-        formulario = forms.FormLivro(request.POST)        
+        formulario = forms.FormLivro(request.POST)     
         if formulario.is_valid():
             info_livro = {
                 'titulo': request.POST.get('titulo_livro'),
@@ -50,7 +47,7 @@ def create_book_form(request):
                 'cat': request.POST.get('categoria'),
                 'sin': request.POST.get('sinopse'),
                 'src': request.POST.get('src_imagem'),
-            }            
+            }
             formulario.save(info_livro['titulo'],
                             info_livro['autor'],
                             info_livro['editora'],
@@ -66,7 +63,7 @@ def create_book_form(request):
     return render(request, 'home/cadastro_livro.html', {'form':forms.FormLivro()})
 
 
-# def save_book(request):
-#     if request.method == "POST":  
-#         form = formFormLivro(request.POST) 
-        
+def get_books(request):
+    livro = models.Livro.objects.all()
+    context = {'books':livro}
+    return render(request, 'home/consultar_livros.html', context)

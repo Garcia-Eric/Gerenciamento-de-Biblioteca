@@ -1,0 +1,26 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    <div container style='display:flex'>
+        <div>
+            <ul>
+            {% for livro in books %}                
+                <li>{{livro.id}}</li>
+                <img src="{{livro.src_imagem}}"
+                    height=512>
+            {% endfor %}
+            </ul>
+        </div>
+        
+        <div>
+            <ul>
+            {% for livro in books %}                
+                <li>{{livro.id}}</li>
+                <img src="{{livro.src_imagem}}"
+                    height=512>
+            {% endfor %}
+            </ul>
+        </div>
+
+    </div>
+{% endblock %}
