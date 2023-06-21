@@ -1,8 +1,19 @@
+from django.conf import settings
 from django.db import models
 import datetime
-from django.conf import settings
 
 # Create your models here.
+
+class Usuario(models.Model):
+    cpf = models.CharField(max_length=11, primary_key=True, unique=True)
+    nome_completo = models.CharField(max_length=70)
+    email = models.EmailField(max_length=255)
+    telefone = models.CharField(max_length=12)
+    dependentes = models.ForeignKey("self", on_delete=models.DO_NOTHING, null=True)
+    
+    class Meta():
+        db_table = 'usuarios'
+
 class Genero(models.Model):
     tipo_genero = models.CharField(max_length=50)
 
