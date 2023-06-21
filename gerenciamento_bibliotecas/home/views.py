@@ -85,11 +85,11 @@ def get_book_information(request, id):
 
 
 
-# def create_book_lending(request):
-#     if request.method == "POST":  
-#         formulario = forms.FormEmprestimo(request.POST)     
-#         if formulario.is_valid():
-#             return HttpResponseRedirect(request.path_info)
-#     else:
-#         formulario = forms.FormEmprestimo()        
-#     return render(request, 'home/emprestimos/cadastro_emprestimo.html', {'form':forms.FormEmprestimo()})
+def create_book_lending(request):
+    if request.method == "POST":  
+        formulario = forms.FormEmprestimo(request.POST)     
+        if formulario.is_valid():
+            return HttpResponseRedirect(request.path_info)
+    else:
+        formulario = forms.FormEmprestimo()        
+    return render(request, 'home/emprestimos/cadastro_emprestimo.html', {'form':forms.FormEmprestimo()})

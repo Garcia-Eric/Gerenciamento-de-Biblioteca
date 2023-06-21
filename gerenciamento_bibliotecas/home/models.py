@@ -9,7 +9,12 @@ class Usuario(models.Model):
     nome_completo = models.CharField(max_length=70)
     email = models.EmailField(max_length=255)
     telefone = models.CharField(max_length=12)
-    dependentes = models.ForeignKey("self", on_delete=models.DO_NOTHING, null=True)
+    dependentes = models.ForeignKey("self", on_delete=models.DO_NOTHING, null=True, blank=True)    
+    
+    def get_cpf(self):
+        return f"{self.cpf[0:3]}.{self.cpf[3:6]}.{self.cpf[6:9]}-{self.cpf[9:12]}"
+    def __str__(self) -> str:
+        return f"{self.get_cpf()} - {self.nome_completo}"
     
     class Meta():
         db_table = 'usuarios'
@@ -111,9 +116,8 @@ class Emprestimo(models.Model):
     DIAS_MES = 31
     # Adição de 2 meses a data atual
     daqui_2_meses = hoje + datetime.timedelta(days=DIAS_MES * 2)
-    AUTH_USER_MODEL = getattr(settings, 'AUTH_USER_MODEL', 'auth.User')
 
-    fk_user = models.OneToOneField(AUTH_USER_MODEL, blank=False, null=False, on_delete=models.RESTRICT)
+    fk_user = models.OneToOneField(Usuario, blank=False, null=False, on_delete=models.RESTRICT)
     fk_livro = models.OneToOneField(Livro, blank=False, null=False, on_delete=models.RESTRICT)
     data_emprestimo = models.DateField(default=hoje)
     prazo_devolucao = models.DateField(default=daqui_2_meses)

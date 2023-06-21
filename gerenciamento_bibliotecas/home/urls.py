@@ -7,5 +7,5 @@ urlpatterns = [
     path('consultar_livros/', views.get_books, name='consultar_livros'),
     path('informacoes_livro/<int:id>', views.get_book_information, name='informacoes_livro'),
     
-    # path('cadastrar_emprestimo/', views.create_book_lending, name='cadastro_emprestimo')
+    path('cadastrar_emprestimo/', views.create_book_lending, name='cadastro_emprestimo')
 ]

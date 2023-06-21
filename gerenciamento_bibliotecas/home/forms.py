@@ -1,5 +1,5 @@
 from django import forms
-from .models import Genero, Emprestimo, Livro
+from .models import Genero, Emprestimo, Livro, Usuario
 from django.conf import settings
 
 class FormLivro(forms.Form):
@@ -20,13 +20,11 @@ class FormLivro(forms.Form):
         Livro.save_livro(tit, aut, edi, gen, loc, cat, sin, src)
 
 
-# class FormEmprestimo(forms.Form):
-#     from django.contrib.auth import get_user_model
-#     lista_livros_disponiveis = Livro.get_livros_disponiveis()
-#     LIVROS_DISPONIVEIS = [(livro.id, livro.titulo_livro) for livro in lista_livros_disponiveis]
+class FormEmprestimo(forms.Form):
+    lista_livros_disponiveis = Livro.get_livros_disponiveis()
+    LIVROS_DISPONIVEIS = [(livro.id, livro.titulo_livro) for livro in lista_livros_disponiveis]
     
-#     User = get_user_model()
-#     users = [(user.id, user.username) for user in User.objects.all()]
-#     usuarios = forms.ChoiceField(label="Livros disponíveis para empréstimo",choices=users)
-#     livro_emprestimo = forms.ChoiceField(label="Livros disponíveis para empréstimo",choices=LIVROS_DISPONIVEIS)
+    users = [(user.cpf, user.nome_completo) for user in Usuario.objects.all()]
+    usuarios = forms.ChoiceField(label="Livros disponíveis para empréstimo",choices=users)
+    livro_emprestimo = forms.ChoiceField(label="Livros disponíveis para empréstimo",choices=LIVROS_DISPONIVEIS)
     
