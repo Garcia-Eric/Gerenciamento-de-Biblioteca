@@ -33,7 +33,7 @@ def home(request):
 
     return render(request, 'home/home.html', context)
 
-
+# Cadastros
 def create_book_form(request):
     if request.method == "POST":  
         formulario = forms.FormLivro(request.POST)     
@@ -63,6 +63,38 @@ def create_book_form(request):
     return render(request, 'home/livros/cadastro_livro.html', {'form':forms.FormLivro()})
 
 
+def create_user(request):
+    if request.method == "POST":  
+        formulario = forms.FormUsuario(request.POST)     
+        if formulario.is_valid():
+            
+            info_user = {
+                'cpf': request.POST.get('cpf'),
+                'nome': request.POST.get('nome_completo'),
+                'email': request.POST.get('email'),
+                'telefone': request.POST.get('telefone'),
+            }
+            formulario.save(info_user['cpf'],
+                            info_user['nome'],
+                            info_user['email'],
+                            info_user['telefone'],
+                            )            
+            return HttpResponseRedirect(request.path_info)
+    else:
+        formulario = forms.FormUsuario()        
+    return render(request, 'home/usuarios/cadastro_usuarios.html', {'form':forms.FormUsuario()})
+    
+
+def create_book_lending(request):
+    if request.method == "POST":  
+        formulario = forms.FormEmprestimo(request.POST)     
+        if formulario.is_valid():
+            return HttpResponseRedirect(request.path_info)
+    else:
+        formulario = forms.FormEmprestimo()        
+    return render(request, 'home/emprestimos/cadastro_emprestimo.html', {'form':forms.FormEmprestimo()})
+
+# Consultas
 def get_books(request):
     livros_emprestados = models.Livro.get_livros_emprestados()
     livros_disponiveis = models.Livro.get_livros_disponiveis()
@@ -81,15 +113,3 @@ def get_book_information(request, id):
                     }
                 }
     return render(request, 'home/livros/info_livro.html', context)
-
-
-
-
-def create_book_lending(request):
-    if request.method == "POST":  
-        formulario = forms.FormEmprestimo(request.POST)     
-        if formulario.is_valid():
-            return HttpResponseRedirect(request.path_info)
-    else:
-        formulario = forms.FormEmprestimo()        
-    return render(request, 'home/emprestimos/cadastro_emprestimo.html', {'form':forms.FormEmprestimo()})

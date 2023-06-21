@@ -20,6 +20,16 @@ class FormLivro(forms.Form):
         Livro.save_livro(tit, aut, edi, gen, loc, cat, sin, src)
 
 
+class FormUsuario(forms.Form):
+    cpf = forms.CharField(max_length=11)
+    nome_completo = forms.CharField(max_length=70)
+    email = forms.EmailField(max_length=255)
+    telefone = forms.CharField(max_length=12)
+    
+    def save(self, cpf, nome, email, telefone):
+        Usuario.save_usuario(cpf, nome, email, telefone)    
+
+
 class FormEmprestimo(forms.Form):
     lista_livros_disponiveis = Livro.get_livros_disponiveis()
     LIVROS_DISPONIVEIS = [(livro.id, livro.titulo_livro) for livro in lista_livros_disponiveis]

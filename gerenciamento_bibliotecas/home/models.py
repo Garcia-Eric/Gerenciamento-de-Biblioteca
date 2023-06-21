@@ -13,6 +13,28 @@ class Usuario(models.Model):
     
     def get_cpf(self):
         return f"{self.cpf[0:3]}.{self.cpf[3:6]}.{self.cpf[6:9]}-{self.cpf[9:12]}"
+    
+    @classmethod
+    def get_usuarios(cls):
+        return cls.objects.all()
+    
+    @classmethod
+    def get_usuarios_com_emprestimos(cls):
+        return [u.fk_user for u in Emprestimo.objects.all()]  
+      
+    @classmethod
+    def get_usuarios_disponiveis(cls):
+        id_usuarios_com_emprestimos = [l.pk for l in cls.get_usuarios_com_emprestimos()]
+        return [l for l in cls.objects.all().exclude(cpf__in=id_usuarios_com_emprestimos)]
+    
+    @classmethod
+    def save_usuario(cls, cpf, nome, email, telefone):
+        user = cls.objects.create(
+                        cpf=cpf, nome_completo=nome,
+                        email=email, telefone=telefone,
+                    )
+        user.save()
+    
     def __str__(self) -> str:
         return f"{self.get_cpf()} - {self.nome_completo}"
     
@@ -73,11 +95,14 @@ class Livro(models.Model):
     @classmethod
     def get_livros(cls):
         return cls.objects.all()
+    
     @classmethod
     def get_livros_emprestados(cls):
-        return [o.fk_livro for o in Emprestimo.objects.all()]    
+        return [o.fk_livro for o in Emprestimo.objects.all()]   
+     
     def get_generos_livro(self):
         return [genero.tipo_genero for genero in self.genero.all()]
+    
     def get_localizacao_livro(self):
         localizacao = self.localizacao
         return [list(local) for local in Livro.LOCALIZACAO_CHOICES if local[0]==localizacao]
