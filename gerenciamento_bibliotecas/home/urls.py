@@ -14,4 +14,5 @@ urlpatterns = [
     path('consultar_livros/', views.get_books, name='consultar_livros'),
     path('informacoes_livro/<int:id>', views.get_book_information, name='informacoes_livro'),    
     path('consultar_usuarios/', views.get_users, name='consultar_usuarios'),
+    path('consultar_emprestimos/', views.get_lendings, name='consultar_emprestimos'),
 ]
