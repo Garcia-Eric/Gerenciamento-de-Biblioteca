@@ -1,0 +1,29 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    <consulta-livros container flex="centro">
+        <div>
+            <h2>Todos usuários</h2>
+            {% for usuario in usuarios.todos_usuarios %}
+                    <div class="margem-pequena" flex>
+                        <p class="margem-pequena">
+                            CPF: {{usuario.cpf}}<br>
+                            {{usuario.nome_completo}}
+                        </p>
+                    </div>
+            {% endfor %}            
+        </div>
+
+        <div>
+            <h2>Usuários com empréstimos</h2>
+            {% for usuario in usuarios.usuarios_com_emprestimo %}
+                    <div class="margem-pequena" flex>
+                        <p class="margem-pequena">
+                            {{usuario.cpf}}<br>
+                            {{usuario.nome_completo}}
+                        </p>
+                    </div>
+            {% endfor %}            
+        </div>
+    </consulta-livros>
+{% endblock %}

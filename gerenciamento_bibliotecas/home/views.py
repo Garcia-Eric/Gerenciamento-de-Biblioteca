@@ -67,7 +67,6 @@ def create_user(request):
     if request.method == "POST":  
         formulario = forms.FormUsuario(request.POST)     
         if formulario.is_valid():
-            
             info_user = {
                 'cpf': request.POST.get('cpf'),
                 'nome': request.POST.get('nome_completo'),
@@ -83,7 +82,7 @@ def create_user(request):
     else:
         formulario = forms.FormUsuario()        
     return render(request, 'home/usuarios/cadastro_usuarios.html', {'form':forms.FormUsuario()})
-    
+
 
 def create_book_lending(request):
     if request.method == "POST":  
@@ -94,6 +93,7 @@ def create_book_lending(request):
         formulario = forms.FormEmprestimo()        
     return render(request, 'home/emprestimos/cadastro_emprestimo.html', {'form':forms.FormEmprestimo()})
 
+
 # Consultas
 def get_books(request):
     livros_emprestados = models.Livro.get_livros_emprestados()
@@ -101,7 +101,17 @@ def get_books(request):
     context = {'emprestados':livros_emprestados,
                'disponiveis':livros_disponiveis}
     return render(request, 'home/livros/consultar_livros.html', context)
-    
+
+
+def get_users(request):
+    usuarios_com_emprestimos = models.Usuario.get_usuarios_com_emprestimos()
+    usuarios = models.Usuario.get_usuarios()
+    context = {'usuarios': {'usuarios_com_emprestimo':usuarios_com_emprestimos,
+                            'todos_usuarios':usuarios,
+                        }
+               }
+    return render(request, 'home/usuarios/consultar_usuarios.html', context)
+
 
 def get_book_information(request, id):
     livro = models.Livro.objects.get(id=id)

@@ -150,6 +150,14 @@ class Emprestimo(models.Model):
     def tempo_ate_devolucao(self):
         return (self.prazo_devolucao - self.data_emprestimo)
     
+    @classmethod
+    def save_usuario(cls, fk_livro, fk_user):
+        lending = cls.objects.create(
+                        cpf=fk_livro, nome_completo=fk_user,
+                        data_emprestimo=cls.hoje, telefone=cls.daqui_2_meses,
+                    )
+        lending.save()
+    
     def __str__(self) -> str:
         return f"Empréstimo: {self.pk}. Devolução: {self.prazo_devolucao}. Tempo até devolução: {self.tempo_ate_devolucao()}"
     
