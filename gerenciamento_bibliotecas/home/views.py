@@ -144,6 +144,6 @@ def get_book_information(request, id):
     return render(request, 'home/livros/info_livro.html', context)
 
 
-def get_lending_information(request, id):
-    context = {}
-    return render(request, 'home/emprestimos/consultar_emprestimos.html', context)
+# def get_lending_information(request, id):
+#     context = {}
+#     return render(request, 'home/emprestimos/consultar_emprestimos.html', context)
