@@ -33,8 +33,9 @@ class FormUsuario(forms.Form):
 class FormEmprestimo(forms.Form):
     lista_livros_disponiveis = Livro.get_livros_disponiveis()
     LIVROS_DISPONIVEIS = [(livro.id, livro.titulo_livro) for livro in lista_livros_disponiveis]
-    
-    users = [(user.cpf, user.nome_completo) for user in Usuario.objects.all()]
-    usuarios = forms.ChoiceField(label="Livros disponíveis para empréstimo",choices=users)
     livro_emprestimo = forms.ChoiceField(label="Livros disponíveis para empréstimo",choices=LIVROS_DISPONIVEIS)
+    
+    lista_usuarios_disponiveis = Usuario.get_usuarios_disponiveis()
+    users = [(user.cpf, user.nome_completo) for user in lista_usuarios_disponiveis]
+    usuarios = forms.ChoiceField(label="Livros disponíveis para empréstimo",choices=users)
     
