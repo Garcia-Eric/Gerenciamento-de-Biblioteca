@@ -33,7 +33,7 @@ def home(request):
 
     return render(request, 'home/home.html', context)
 
-
+# Cadastros
 def create_book_form(request):
     if request.method == "POST":  
         formulario = forms.FormLivro(request.POST)     
@@ -63,12 +63,73 @@ def create_book_form(request):
     return render(request, 'home/livros/cadastro_livro.html', {'form':forms.FormLivro()})
 
 
+def create_user(request):
+    if request.method == "POST":  
+        formulario = forms.FormUsuario(request.POST)     
+        if formulario.is_valid():
+            info_user = {
+                'cpf': request.POST.get('cpf'),
+                'nome': request.POST.get('nome_completo'),
+                'email': request.POST.get('email'),
+                'telefone': request.POST.get('telefone'),
+            }
+            formulario.save(info_user['cpf'],
+                            info_user['nome'],
+                            info_user['email'],
+                            info_user['telefone'],
+                            )            
+            return HttpResponseRedirect(request.path_info)
+    else:
+        formulario = forms.FormUsuario()        
+    return render(request, 'home/usuarios/cadastro_usuarios.html', {'form':forms.FormUsuario()})
+
+
+def create_book_lending(request):
+    if request.method == "POST":  
+        formulario = forms.FormEmprestimo(request.POST)     
+        if formulario.is_valid():
+            lending_info = {
+                'livro': request.POST.get('livro_emprestimo'),
+                'usuario': request.POST.get('usuarios'),
+                'data_devolucao': request.POST.get('data_devolucao'),
+            }
+            formulario.save(lending_info['livro'],
+                            lending_info['usuario'],
+                            lending_info['data_devolucao'],
+                            )            
+            return HttpResponseRedirect(request.path_info)
+    else:
+        formulario = forms.FormEmprestimo()        
+    return render(request, 'home/emprestimos/cadastro_emprestimo.html', {'form':forms.FormEmprestimo()})
+
+
+# Consultas
 def get_books(request):
     livros_emprestados = models.Livro.get_livros_emprestados()
     livros_disponiveis = models.Livro.get_livros_disponiveis()
     context = {'emprestados':livros_emprestados,
                'disponiveis':livros_disponiveis}
     return render(request, 'home/livros/consultar_livros.html', context)
+
+
+def get_users(request):
+    usuarios_sem_emprestimos = models.Usuario.get_usuarios_disponiveis()
+    usuarios_com_emprestimos = models.Usuario.get_usuarios_com_emprestimos()
+    emprestimos = models.Emprestimo.get_emprestimos()    
+    context = {'usuarios': {'sem_emprestimo':usuarios_sem_emprestimos,
+                            'com_emprestimo':usuarios_com_emprestimos,                            
+                        },
+               'emprestimos': emprestimos
+               }
+    
+    return render(request, 'home/usuarios/consultar_usuarios.html', context)
+
+
+def get_lendings(request):
+    emprestimos = models.Emprestimo.get_emprestimos()    
+    context = {'emprestimos': emprestimos}
+    
+    return render(request, 'home/emprestimos/consultar_emprestimos.html', context)
     
 
 def get_book_information(request, id):
@@ -83,13 +144,6 @@ def get_book_information(request, id):
     return render(request, 'home/livros/info_livro.html', context)
 
 
-
-
-# def create_book_lending(request):
-#     if request.method == "POST":  
-#         formulario = forms.FormEmprestimo(request.POST)     
-#         if formulario.is_valid():
-#             return HttpResponseRedirect(request.path_info)
-#     else:
-#         formulario = forms.FormEmprestimo()        
-#     return render(request, 'home/emprestimos/cadastro_emprestimo.html', {'form':forms.FormEmprestimo()})
+# def get_lending_information(request, id):
+#     context = {}
+#     return render(request, 'home/emprestimos/consultar_emprestimos.html', context)

@@ -1,6 +1,7 @@
 from django import forms
-from .models import Genero, Emprestimo, Livro
+from .models import Genero, Emprestimo, Livro, Usuario
 from django.conf import settings
+import datetime
 
 class FormLivro(forms.Form):
     CATEGORIA_CHOICES = Livro.get_categorias()
@@ -20,13 +21,30 @@ class FormLivro(forms.Form):
         Livro.save_livro(tit, aut, edi, gen, loc, cat, sin, src)
 
 
-# class FormEmprestimo(forms.Form):
-#     from django.contrib.auth import get_user_model
-#     lista_livros_disponiveis = Livro.get_livros_disponiveis()
-#     LIVROS_DISPONIVEIS = [(livro.id, livro.titulo_livro) for livro in lista_livros_disponiveis]
+class FormUsuario(forms.Form):
+    cpf = forms.CharField(max_length=11)
+    nome_completo = forms.CharField(max_length=70)
+    email = forms.EmailField(max_length=255)
+    telefone = forms.CharField(max_length=12)
     
-#     User = get_user_model()
-#     users = [(user.id, user.username) for user in User.objects.all()]
-#     usuarios = forms.ChoiceField(label="Livros disponíveis para empréstimo",choices=users)
-#     livro_emprestimo = forms.ChoiceField(label="Livros disponíveis para empréstimo",choices=LIVROS_DISPONIVEIS)
+    def save(self, cpf, nome, email, telefone):
+        Usuario.save_usuario(cpf, nome, email, telefone)    
+
+
+class FormEmprestimo(forms.Form):
+
+    lista_livros_disponiveis = Livro.get_livros_disponiveis()
+    LIVROS_DISPONIVEIS = [(livro.id, livro.titulo_livro) for livro in lista_livros_disponiveis]
+    livro_emprestimo = forms.ChoiceField(label="Livros disponíveis para empréstimo",choices=LIVROS_DISPONIVEIS)
     
+    lista_usuarios_disponiveis = Usuario.get_usuarios_disponiveis()
+    users = [(user.cpf, user.nome_completo) for user in lista_usuarios_disponiveis]
+    usuarios = forms.ChoiceField(label="Livros disponíveis para empréstimo",choices=users)
+    
+    hoje = datetime.date.today()
+    DIAS_MES = 31
+    daqui_2_meses = hoje + datetime.timedelta(days=DIAS_MES * 2)
+    data_devolucao = forms.DateField(label="Data devolução", initial=daqui_2_meses)
+    
+    def save(self, fk_livro, fk_user, data_devolucao):
+        Emprestimo.create_emprestimo(fk_livro, fk_user, data_devolucao)
