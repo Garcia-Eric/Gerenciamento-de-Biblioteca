@@ -2,28 +2,51 @@
 
 {% block content %}
     <consulta-livros container flex="centro">
+        {% if usuarios.sem_emprestimo %}
         <div>
-            <h2>Todos usuários</h2>
-            {% for usuario in usuarios.todos_usuarios %}
+            <h2>Usuários sem empréstimos</h2>
+            {% for usuario in usuarios.sem_emprestimo %}
+                    <div class="margem-pequena" flex>
+                        <p class="margem-pequena">
+                            CPF: {{usuario.get_cpf}}<br>
+                            {{usuario.get_nome_completo}}
+                        </p>
+                    </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        {% comment %}
+        {% if usuarios.com_emprestimo %}
+        <div>
+            <h2>Usuários com empréstimos</h2>
+            {% for usuario in usuarios.com_emprestimo %}
                     <div class="margem-pequena" flex>
                         <p class="margem-pequena">
                             CPF: {{usuario.cpf}}<br>
                             {{usuario.nome_completo}}
                         </p>
+                        <p>aAAAAAAAAAAAAA</p>
                     </div>
-            {% endfor %}            
+            {% endfor %}
         </div>
+        {% endif %}
+        {% endcomment %}
 
+        {% if emprestimos %}
         <div>
             <h2>Usuários com empréstimos</h2>
-            {% for usuario in usuarios.usuarios_com_emprestimo %}
+            {% for emprestimo in emprestimos %}
                     <div class="margem-pequena" flex>
                         <p class="margem-pequena">
-                            {{usuario.cpf}}<br>
-                            {{usuario.nome_completo}}
-                        </p>
+                            CPF: {{emprestimo.fk_user.get_cpf}}<br>
+                            {{emprestimo.fk_user.get_nome_completo}}<br>
+                            Data devolução: {{emprestimo.prazo_devolucao}}
+                        </p><br>
                     </div>
-            {% endfor %}            
+            {% endfor %}
         </div>
+        {% endif %}
+
     </consulta-livros>
 {% endblock %}

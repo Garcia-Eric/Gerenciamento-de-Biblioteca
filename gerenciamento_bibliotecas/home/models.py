@@ -14,6 +14,15 @@ class Usuario(models.Model):
     def get_cpf(self):
         return f"{self.cpf[0:3]}.{self.cpf[3:6]}.{self.cpf[6:9]}-{self.cpf[9:12]}"
     
+    def get_nome_completo(self):
+        return f"{self.nome_completo}"
+    
+    def get_primeiro_nome(self):
+        return f"{self.nome_completo.split()[0]}"
+    
+    def get_ultimo_nome(self):
+        return f"{self.nome_completo.split()[-1]}"
+    
     @classmethod
     def get_usuarios(cls):
         return cls.objects.all()
@@ -40,7 +49,7 @@ class Usuario(models.Model):
         user.save()
     
     def __str__(self) -> str:
-        return f"{self.get_cpf()} - {self.nome_completo}"
+        return f"{self.get_cpf()} - {self.get_nome_completo()}"
     
     class Meta():
         db_table = 'usuarios'
@@ -157,6 +166,10 @@ class Emprestimo(models.Model):
     
     def tempo_ate_devolucao(self):
         return (self.prazo_devolucao - self.data_emprestimo)
+    
+    @classmethod
+    def get_emprestimos(cls):
+        return cls.objects.all()
     
     @classmethod
     def create_emprestimo(cls, fk_livro, fk_user):

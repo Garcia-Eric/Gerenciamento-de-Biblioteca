@@ -111,14 +111,19 @@ def get_books(request):
 
 
 def get_users(request):
+    usuarios_sem_emprestimos = models.Usuario.get_usuarios_disponiveis()
     usuarios_com_emprestimos = models.Usuario.get_usuarios_com_emprestimos()
-    usuarios = models.Usuario.get_usuarios()
-    context = {'usuarios': {'usuarios_com_emprestimo':usuarios_com_emprestimos,
-                            'todos_usuarios':usuarios,
-                        }
+    emprestimos = models.Emprestimo.get_emprestimos()
+    
+    context = {'usuarios': {'sem_emprestimo':usuarios_sem_emprestimos,
+                            'com_emprestimo':usuarios_com_emprestimos,                            
+                        },
+               'emprestimos': emprestimos
                }
     return render(request, 'home/usuarios/consultar_usuarios.html', context)
 
+def get_lendings(request):
+    ...
 
 def get_book_information(request, id):
     livro = models.Livro.objects.get(id=id)
