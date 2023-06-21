@@ -39,3 +39,5 @@ class FormEmprestimo(forms.Form):
     users = [(user.cpf, user.nome_completo) for user in lista_usuarios_disponiveis]
     usuarios = forms.ChoiceField(label="Livros disponíveis para empréstimo",choices=users)
     
+    def save(self, fk_livro, fk_user):
+        Emprestimo.create_emprestimo(fk_livro, fk_user)

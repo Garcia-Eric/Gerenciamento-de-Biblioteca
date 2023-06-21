@@ -28,6 +28,10 @@ class Usuario(models.Model):
         return [l for l in cls.objects.all().exclude(cpf__in=id_usuarios_com_emprestimos)]
     
     @classmethod
+    def get_usuario_por_cpf(cls, cpf):
+        return cls.objects.get(cpf = cpf)
+    
+    @classmethod
     def save_usuario(cls, cpf, nome, email, telefone):
         user = cls.objects.create(
                         cpf=cpf, nome_completo=nome,
@@ -113,6 +117,10 @@ class Livro(models.Model):
         return [l for l in cls.objects.all().exclude(id__in=id_livros_emprestados)]
 
     @classmethod
+    def get_livro_por_id(cls, id):
+        return cls.objects.get(id = id)
+
+    @classmethod
     def save_livro(cls, tit, aut, edi, gen, loc, cat, sin, src):
         genero = Genero.objects.filter(id=gen)
         
@@ -135,7 +143,7 @@ class Livro(models.Model):
         ordering = ['titulo_livro']
         
         
-class Emprestimo(models.Model):    
+class Emprestimo(models.Model):
     # Data atual
     hoje = datetime.date.today()
     DIAS_MES = 31
@@ -151,10 +159,13 @@ class Emprestimo(models.Model):
         return (self.prazo_devolucao - self.data_emprestimo)
     
     @classmethod
-    def save_usuario(cls, fk_livro, fk_user):
+    def create_emprestimo(cls, fk_livro, fk_user):
+        livro = Livro.get_livro_por_id(fk_livro)
+        usuario = Usuario.get_usuario_por_cpf(cpf = fk_user)
+        
         lending = cls.objects.create(
-                        cpf=fk_livro, nome_completo=fk_user,
-                        data_emprestimo=cls.hoje, telefone=cls.daqui_2_meses,
+                        fk_livro=livro, fk_user=usuario,
+                        data_emprestimo=cls.hoje, prazo_devolucao=cls.daqui_2_meses,
                     )
         lending.save()
     

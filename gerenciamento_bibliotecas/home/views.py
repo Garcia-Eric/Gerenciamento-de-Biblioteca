@@ -88,6 +88,13 @@ def create_book_lending(request):
     if request.method == "POST":  
         formulario = forms.FormEmprestimo(request.POST)     
         if formulario.is_valid():
+            lending_info = {
+                'livro': request.POST.get('livro_emprestimo'),
+                'usuario': request.POST.get('usuarios'),
+            }
+            formulario.save(lending_info['livro'],
+                            lending_info['usuario'],
+                            )            
             return HttpResponseRedirect(request.path_info)
     else:
         formulario = forms.FormEmprestimo()        
