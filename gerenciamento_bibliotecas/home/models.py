@@ -12,6 +12,9 @@ class Usuario(models.Model):
     dependentes = models.ForeignKey("self", on_delete=models.DO_NOTHING, null=True, blank=True)    
     
     def get_cpf(self):
+        return f"{self.cpf}"
+    
+    def get_cpf_com_mascara(self):
         return f"{self.cpf[0:3]}.{self.cpf[3:6]}.{self.cpf[6:9]}-{self.cpf[9:12]}"
     
     def get_nome_completo(self):
@@ -159,7 +162,7 @@ class Emprestimo(models.Model):
     # Adição de 2 meses a data atual
     daqui_2_meses = hoje + datetime.timedelta(days=DIAS_MES * 2)
 
-    fk_user = models.OneToOneField(Usuario, blank=False, null=False, on_delete=models.RESTRICT)
+    fk_user = models.OneToOneField(Usuario, blank=False, null=False, on_delete=models.CASCADE)
     fk_livro = models.OneToOneField(Livro, blank=False, null=False, on_delete=models.RESTRICT)
     data_emprestimo = models.DateField(default=hoje)
     prazo_devolucao = models.DateField(default=daqui_2_meses)
@@ -172,13 +175,13 @@ class Emprestimo(models.Model):
         return cls.objects.all()
     
     @classmethod
-    def create_emprestimo(cls, fk_livro, fk_user):
+    def create_emprestimo(cls, fk_livro, fk_user, data_devolucao):
         livro = Livro.get_livro_por_id(fk_livro)
         usuario = Usuario.get_usuario_por_cpf(cpf = fk_user)
         
         lending = cls.objects.create(
                         fk_livro=livro, fk_user=usuario,
-                        data_emprestimo=cls.hoje, prazo_devolucao=cls.daqui_2_meses,
+                        data_emprestimo=cls.hoje, prazo_devolucao=data_devolucao,
                     )
         lending.save()
     

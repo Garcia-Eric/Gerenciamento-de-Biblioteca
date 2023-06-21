@@ -8,7 +8,7 @@
             {% for usuario in usuarios.sem_emprestimo %}
                     <div class="margem-pequena" flex>
                         <p class="margem-pequena">
-                            CPF: {{usuario.get_cpf}}<br>
+                            CPF: {{usuario.get_cpf_com_mascara}}<br>
                             {{usuario.get_nome_completo}}
                         </p>
                     </div>
@@ -39,7 +39,7 @@
             {% for emprestimo in emprestimos %}
                     <div class="margem-pequena" flex>
                         <p class="margem-pequena">
-                            CPF: {{emprestimo.fk_user.get_cpf}}<br>
+                            CPF: {{emprestimo.fk_user.get_cpf_com_mascara}}<br>
                             {{emprestimo.fk_user.get_nome_completo}}<br>
                             Data devolução: {{emprestimo.prazo_devolucao}}
                         </p><br>

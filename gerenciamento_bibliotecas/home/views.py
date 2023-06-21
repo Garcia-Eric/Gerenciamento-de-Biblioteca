@@ -91,9 +91,11 @@ def create_book_lending(request):
             lending_info = {
                 'livro': request.POST.get('livro_emprestimo'),
                 'usuario': request.POST.get('usuarios'),
+                'data_devolucao': request.POST.get('data_devolucao'),
             }
             formulario.save(lending_info['livro'],
                             lending_info['usuario'],
+                            lending_info['data_devolucao'],
                             )            
             return HttpResponseRedirect(request.path_info)
     else:
@@ -113,17 +115,22 @@ def get_books(request):
 def get_users(request):
     usuarios_sem_emprestimos = models.Usuario.get_usuarios_disponiveis()
     usuarios_com_emprestimos = models.Usuario.get_usuarios_com_emprestimos()
-    emprestimos = models.Emprestimo.get_emprestimos()
-    
+    emprestimos = models.Emprestimo.get_emprestimos()    
     context = {'usuarios': {'sem_emprestimo':usuarios_sem_emprestimos,
                             'com_emprestimo':usuarios_com_emprestimos,                            
                         },
                'emprestimos': emprestimos
                }
+    
     return render(request, 'home/usuarios/consultar_usuarios.html', context)
 
+
 def get_lendings(request):
-    ...
+    emprestimos = models.Emprestimo.get_emprestimos()    
+    context = {'emprestimos': emprestimos}
+    
+    return render(request, 'home/emprestimos/consultar_emprestimos.html', context)
+    
 
 def get_book_information(request, id):
     livro = models.Livro.objects.get(id=id)
@@ -135,3 +142,8 @@ def get_book_information(request, id):
                     }
                 }
     return render(request, 'home/livros/info_livro.html', context)
+
+
+def get_lending_information(request, id):
+    context = {}
+    return render(request, 'home/emprestimos/consultar_emprestimos.html', context)
