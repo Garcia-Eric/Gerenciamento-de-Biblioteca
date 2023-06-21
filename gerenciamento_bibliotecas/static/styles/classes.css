@@ -5,3 +5,7 @@
 .texto-vermelho {
     color: var(--vermelho);
 }
+
+.margem-pequena {
+    margin: 10px;
+}
