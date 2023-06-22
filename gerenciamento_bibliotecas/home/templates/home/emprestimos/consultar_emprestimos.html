@@ -1,0 +1,21 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    <div container flex="centro">
+        <div>
+            <h2>Empréstimos</h2>
+            {% for emprestimo in emprestimos %}
+                    <div class="margem-pequena" flex>
+                        <p class="margem-pequena">
+                            Id empréstimo: {{emprestimo.id}}<br>
+                            CPF: {{emprestimo.fk_user.get_cpf_com_mascara}}<br>
+                            {{emprestimo.fk_user.get_nome_completo}}<br>
+                            Livro: {{emprestimo.fk_livro}}<br>
+                            Data devolução: {{emprestimo.tempo_ate_devolucao}}<br>
+                            Data devolução: {{emprestimo.prazo_devolucao}}
+                        </p><br>
+                    </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

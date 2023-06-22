@@ -83,6 +83,18 @@ h3 {
     justify-content: center;
 }
 
+[flex="esquerda"] {
+    justify-content: left;
+}
+
+[grid] {
+    display: grid;
+}
+
+[grid="repeat-2"] {
+    grid-template-columns: repeat(2, 1fr);
+}
+
 usuarios-vencidos > div {
     margin: 0 10px;
 }
@@ -102,4 +114,28 @@ livros-adicionados-recentemente > img {
     height: 266.66px;
     margin: 0 10px;
     box-shadow: 11px 9px 3px 0px rgba(0,0,0,0.1);
+}
+
+consulta-livros > div {
+    width: 500px;
+}
+
+input,
+select {
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button[type=submit] {
+    background-color: #2d4092;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }

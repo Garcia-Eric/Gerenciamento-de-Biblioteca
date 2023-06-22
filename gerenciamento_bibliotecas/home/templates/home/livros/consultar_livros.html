@@ -1,0 +1,35 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    <consulta-livros container flex="centro">
+        <div>
+            <h2>Emprestados</h2>
+            {% for livro in emprestados %}
+                <a href='{% url "informacoes_livro" livro.id %}'>
+                    <div class="margem-pequena" flex>
+                        <img src="{{livro.src_imagem}}" height=128>
+                        <p class="margem-pequena">
+                            {{livro.titulo_livro}}<br>
+                            {{livro.nome_autor}}
+                        </p>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+
+        <div>
+            <h2>Disponíveis</h2>
+            {% for livro in disponiveis %}
+                <a href='{% url "informacoes_livro" livro.id %}'>
+                    <div class="margem-pequena" flex>
+                        <img src="{{livro.src_imagem}}" height=128>
+                        <p class="margem-pequena">
+                            {{livro.titulo_livro}}<br>
+                            {{livro.nome_autor}}
+                        </p>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    </consulta-livros>
+{% endblock %}

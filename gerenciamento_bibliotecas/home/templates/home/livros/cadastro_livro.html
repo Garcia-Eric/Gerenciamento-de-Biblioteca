@@ -1,0 +1,17 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    <cadastro-livro class="container-branco">
+        <div container flex="centro">
+            <form method='POST'>
+                {% csrf_token %}
+                <div id="campos-form-livro">
+                    {{form.as_p}}
+                </div>
+                <p flex="centro">
+                    <button type='submit'>Cadastrar</button>
+                </p>
+            </form>
+        </div>
+    </cadastro-livro>
+{% endblock %}

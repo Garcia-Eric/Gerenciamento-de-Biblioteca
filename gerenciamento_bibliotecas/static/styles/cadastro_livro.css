@@ -1,0 +1,56 @@
+@media (min-width: 1550px) {
+    #campos-form-livro {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    #campos-form-livro > p {
+        display: grid;
+        grid-template-columns: 200px auto;
+    }
+
+    cadastro-livro input,
+    cadastro-livro select {
+        width: 400px;
+    }
+}
+
+@media (min-width: 1000px) {
+    cadastro-livro {
+        width: 95%;
+    }
+
+    #campos-form-livro {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    #campos-form-livro > p {
+        display: grid;
+        grid-template-columns: 200px auto;
+    }
+}
+
+@media (max-width: 1000px) {
+    #campos-form-livro {
+        display: block;
+    }
+
+    #campos-form-livro > p {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+}
+
+cadastro-livro {
+    margin: auto;
+    padding: 50px 10px 0 10px;
+}
+
+#campos-form-livro > p {
+    margin: 0 10px;
+}
+
+cadastro-livro label {
+    line-height: 3.5em;
+}

@@ -5,3 +5,13 @@
 .texto-vermelho {
     color: var(--vermelho);
 }
+
+.margem-pequena {
+    margin: 10px;
+}
+
+.container-branco {
+    display: block;
+    background-color: white;
+    box-shadow: 10px 10px 3px 0px rgba(0,0,0,0.1);
+}
