@@ -4,25 +4,29 @@
 <div container flex>
     <div>
         <h2>{{livro.titulo_livro}}<h2>
-        <img src="{{livro.src_imagem}}" height=512>
-
-        <table>
-        <tr>Autor: {{livro.nome_autor}}</tr><br>
-        <br>
-        <tr>Editora: {{livro.editora}}</tr><br>
-        <tr>Gênero: {% for genero in generos %}
-                        {{genero}}.
-                    {% endfor %}</tr><br>
-        <br>
-        <tr>Localização:<br>
-            {{localizacao.cod}} - {{localizacao.significado}}
-            </tr><br>
-        </table>
-    </div>
-
-    <div>
-        <h3>Sinopse:</h3>
-        <p>{{livro.sinopse}}<p>
-    </div>
+        <img src="{{livro.src_imagem}}" style="float:left; margin-right: 20px;" height=512>
+        
+        <div class="margem-pequena">
+            <p>
+                Autor: {{livro.nome_autor}}
+            </p>
+            <p>
+                Editora: {{livro.editora}}
+            </p>
+            <p>
+                Gêneros: <br>
+                {% for genero in generos %}
+                    - {{genero}}<br>
+                {% endfor %}
+            </p>
+            
+            Localização: {{localizacao.cod}} - {{localizacao.significado}}
+            
+            <div>
+                <h3>Sinopse:</h3>
+                <p style="max-width: 1000px;">{{livro.sinopse}}<p>
+            </div>
+        </div>
+    </div>  
 </div>
 {% endblock %}
