@@ -1,0 +1,8 @@
+cadastro-livro {
+    display: block;
+    background-color: white;
+    width: 500px;
+    margin: auto;
+    padding: 10px;
+    box-shadow: 10px 10px 3px 0px rgba(0,0,0,0.1);
+}
