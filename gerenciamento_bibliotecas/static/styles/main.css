@@ -87,6 +87,14 @@ h3 {
     justify-content: left;
 }
 
+[grid] {
+    display: grid;
+}
+
+[grid="repeat-2"] {
+    grid-template-columns: repeat(2, 1fr);
+}
+
 usuarios-vencidos > div {
     margin: 0 10px;
 }
