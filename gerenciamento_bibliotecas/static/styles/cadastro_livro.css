@@ -1,8 +1,4 @@
 @media (min-width: 1550px) {
-    cadastro-livro {
-        width: 1500px;
-    }
-
     #campos-form-livro {
         display: grid;
         grid-template-columns: repeat(2, 1fr);

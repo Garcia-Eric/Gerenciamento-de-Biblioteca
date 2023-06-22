@@ -1,13 +1,17 @@
 {% extends 'main.html' %}
 
 {% block content %}
-    <div container>
-        <form method='POST'>
-            {% csrf_token %}
-            {{form.as_p}}
-
-            <button type='submit'>Cadastrar empréstimo</button>
-        </form>
-    </div>
-
+    <cadastro-emprestimo class="container-branco">
+        <div container flex="centro">
+            <form method='POST'>
+                {% csrf_token %}
+                <div id="campos-form-emprestimo">
+                    {{form.as_p}}
+                </div>
+                <p flex="centro">
+                    <button type='submit'>Cadastrar</button>
+                </p>
+            </form>
+        </div>
+    </cadastro-emprestimo>
 {% endblock %}

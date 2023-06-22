@@ -1,0 +1,30 @@
+@media (min-width: 500px) {
+    cadastro-emprestimo {
+        width: 500px;
+    }    
+}
+
+@media (max-width: 500px) {    
+    cadastro-emprestimo {
+        width: 100%;
+    }
+}
+
+#campos-form-emprestimo > p {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin: 0 10px;
+}
+
+#campos-form-emprestimo {
+    display: block;
+}
+
+cadastro-emprestimo {
+    margin: auto;
+    padding: 50px 10px 0 10px;
+}
+
+cadastro-emprestimo label {
+    line-height: 3.5em;
+}

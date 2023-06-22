@@ -39,7 +39,7 @@ class FormEmprestimo(forms.Form):
     
     lista_usuarios_disponiveis = Usuario.get_usuarios_disponiveis()
     users = [(user.cpf, user.nome_completo) for user in lista_usuarios_disponiveis]
-    usuarios = forms.ChoiceField(label="Livros disponíveis para empréstimo",choices=users)
+    usuarios = forms.ChoiceField(label="Usuários",choices=users)
     
     hoje = datetime.date.today()
     DIAS_MES = 31

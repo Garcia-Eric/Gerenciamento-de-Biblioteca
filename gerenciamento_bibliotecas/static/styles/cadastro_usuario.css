@@ -1,0 +1,30 @@
+@media (min-width: 500px) {
+    cadastro-usuario {
+        width: 500px;
+    }    
+}
+
+@media (max-width: 500px) {    
+    cadastro-usuario {
+        width: 100%;
+    }
+}
+
+#campos-form-usuario > p {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin: 0 10px;
+}
+
+#campos-form-usuario {
+    display: block;
+}
+
+cadastro-usuario {
+    margin: auto;
+    padding: 50px 10px 0 10px;
+}
+
+cadastro-usuario label {
+    line-height: 3.5em;
+}
